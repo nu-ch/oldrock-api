@@ -1,32 +1,31 @@
 package main
 
 import (
-	"fmt"
-	"time"
+	"log"
+	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gorilla/mux"
 	"github.com/oldrock-api/auth"
+	middlewares "github.com/oldrock-api/handlers"
+	"github.com/rs/cors"
 )
 
 func main() {
+	port := middlewares.DotEnvVariable("PORT")
 
-	router := gin.New()
-	auth.RegisterHandlers(router)
+	middlewares.Logger("Server running on : " + port)
 
-	router.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 
-		return fmt.Sprintf("%s - [%s] \"%s %s %s %d %s \"%s\" %s\"\n",
-			param.ClientIP,
-			param.TimeStamp.Format(time.RFC1123),
-			param.Method,
-			param.Path,
-			param.Request.Proto,
-			param.StatusCode,
-			param.Latency,
-			param.Request.UserAgent(),
-			param.ErrorMessage,
-		)
-	}))
+	router := mux.NewRouter()
+	auth.Routes(router)
 
-	router.Run(":8080")
+	c := cors.New(cors.Options{
+		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},
+		AllowedHeaders: []string{"Content-Type", "Origin", "Accept", "*"},
+	})
+
+	handler := c.Handler(router)
+
+	http.ListenAndServe(":"+port, middlewares.LogRequest(handler))
 }
