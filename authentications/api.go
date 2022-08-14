@@ -138,7 +138,7 @@ func loginWithEmail() http.HandlerFunc {
 			return
 		}
 
-		if isMatch := middlewares.CheckPasswordHash(login.Password, account.Password); isMatch == false {
+		if isMatch := middlewares.CheckPasswordHash(login.Password, account.Password); !isMatch {
 			middlewares.ErrorResponse("Password mismatch. Please try again", response)
 			return
 		}
