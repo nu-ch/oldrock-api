@@ -13,32 +13,16 @@ $ cd oldrock-api
 ```
 https://github.com/nu-ch/oldrock-api.git is the canonical Git repository.
 It is mirrored at https://github.com/nu-ch/oldrock-api.git.
-## [hello](hello/) and [stringutil](stringutil/)
+## [authentications](authentications/)
 
 ```
-$ cd example/hello
+$ cd authentications
 $ go build
 ```
-A trivial "Hello, world" program that uses a stringutil package.
+A trivial "Hello, world" program that uses a oldrock-api package.
 
 Command [hello](hello/) covers:
 
-* The basic form of an executable command
-* Importing packages (from the standard library and the local repository)
-* Printing strings ([fmt](//golang.org/pkg/fmt/))
-
-Library [stringutil](stringutil/) covers:
-
-* The basic form of a library
-* Conversion between string and []rune
-* Table-driven unit tests ([testing](//golang.org/pkg/testing/))
-
-## [outyet](outyet/)
-
-```
-$ cd outyet
-$ go build
-```
 A web server that answers the question: "Is Go 1.x out yet?"
 
 Topics covered:
