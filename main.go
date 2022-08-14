@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/oldrock-api/auth"
+	authentication "github.com/oldrock-api/authentications"
 	middlewares "github.com/oldrock-api/handlers"
 	"github.com/rs/cors"
 )
@@ -13,12 +13,13 @@ import (
 func main() {
 	port := middlewares.DotEnvVariable("PORT")
 
-	middlewares.Logger("Server running on : " + port)
+	middlewares.DebugLogger("Server running on : " + port)
 
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 
 	router := mux.NewRouter()
-	auth.Routes(router)
+
+	authentication.Routes(router)
 
 	c := cors.New(cors.Options{
 		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},

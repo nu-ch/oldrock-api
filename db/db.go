@@ -29,7 +29,7 @@ func Connect() *mongo.Client {
 		log.Fatal(err)
 	}
 
-	middlewares.Logger("Connection to database")
+	middlewares.DebugLogger("Connection to database")
 
 	return client
 }
