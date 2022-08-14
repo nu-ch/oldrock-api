@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/golang-jwt/jwt/v4"
 )
@@ -46,19 +47,20 @@ func IsAuthorized(next http.Handler) http.HandlerFunc {
 	})
 }
 
-// func GenerateJWT() (string, error) {
-// 	token := jwt.E(jwt.SigningMethodHS256)
+func GenerateJWT(payload interface{}) (string, error) {
 
-// 	claims := token.Claims.(jwt.MapClaims)
+	now := time.Now()
 
-// 	claims["accountId"] = "Elliot Forbes"
-// 	claims["exp"] = time.Now().Add(time.Minute * 30).Unix()
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"payload":   payload,
+		"ExpiresAt": now.Add(1 * time.Hour * 24).Unix(),
+	})
 
-// 	tokenString, err := token.SignedString(signingKey)
+	tokenString, err := token.SignedString(signingKey)
 
-// 	if err != nil {
-// 		return "", err
-// 	}
+	if err != nil {
+		return "", err
+	}
 
-// 	return tokenString, nil
-// }
+	return tokenString, nil
+}
