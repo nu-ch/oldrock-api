@@ -11,6 +11,7 @@ var validate *validator.Validate
 
 func ValidateInputs(dataSet interface{}) (bool, map[string][]string) {
 	validate = validator.New()
+
 	err := validate.Struct(dataSet)
 
 	if err != nil {
