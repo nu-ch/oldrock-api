@@ -1,4 +1,5 @@
-# Oldrock API
+# golang-tutorial
+ API
 
 [![Go Reference](https://pkg.go.dev/badge/golang.org/x/example.svg)](https://pkg.go.dev/golang.org/x/example)
 
@@ -8,11 +9,11 @@ demonstrate the language, standard libraries, and tools.
 ## Clone the project
 
 ```
-$ git clone https://github.com/nu-ch/oldrock-api.git
-$ cd oldrock-api
+$ git clone https://github.com/nu-ch/golang-tutorial.git
+$ cd golang-tutorial
 ```
 https://github.com/nu-ch/oldrock-api.git is the canonical Git repository.
-It is mirrored at https://github.com/nu-ch/oldrock-api.git.
+It is mirrored at https://github.com/nu-ch/golang-tutorial.git.
 ## [authentications](authentications/)
 
 ```
